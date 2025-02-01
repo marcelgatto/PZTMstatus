@@ -1,23 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live Project Status for Farmers</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Registration Status</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+    #content {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #f7f7f7;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Project Live Status</h1>
-    <p>Real-time updates for our farming community</p>
-  </header>
-  <main>
-    <!-- This section will show live data -->
-    <div id="liveStatus">Loading live status...</div>
-  </main>
-  <footer>
-    <p>&copy; 2025 NFT - PZTM Project</p>
-  </footer>
-  <script src="app.js"></script>
+  <h1>Registration Status</h1>
+  <div id="content">Loading...</div>
+
+  <script>
+    function displayStatus() {
+      const hash = window.location.hash;
+      const contentDiv = document.getElementById("content");
+
+      // Expecting the hash format to be "#/status/<registrationId>"
+      if (hash.startsWith("#/status/")) {
+        const parts = hash.split("/");
+        const registrationId = parts[2];
+        // Here, you could add code to fetch additional registration info via an API.
+        contentDiv.innerText = "Your registration ID is: " + registrationId;
+      } else {
+        contentDiv.innerText = "No registration ID found in the URL.";
+      }
+    }
+
+    // Update content on page load and when the hash changes
+    window.addEventListener("load", displayStatus);
+    window.addEventListener("hashchange", displayStatus);
+  </script>
 </body>
 </html>
